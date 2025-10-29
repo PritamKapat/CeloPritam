@@ -1,3 +1,5 @@
+<img width="1032" height="402" alt="image" src="https://github.com/user-attachments/assets/3c0043f4-68e8-4f95-b995-454aa0509de7" />
+
 # WorkChain Records ⛓️
 
 A simple Smart Contract for On-Chain Job Assignment Tracking.
