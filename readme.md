@@ -30,42 +30,6 @@ The WorkChainRecords contract provides the following core functionalities:
 
 ⏱️ Timestamped Proof: Every submission is recorded with the block timestamp for accurate proof of work.
 
-Function / Variable
-
-Type
-
-Description
-
-submitAssignment(string memory _description)
-
-Write (Transaction)
-
-Creates a new assignment record and stores it on the blockchain. Requires gas.
-
-getAssignment(uint256 _id)
-
-Read (View)
-
-Retrieves the full structured data (ID, submitter, description, timestamp) for any existing record.
-
-getTotalAssignments()
-
-Read (View)
-
-Returns the total number of work assignments submitted so far.
-
-records(uint256)
-
-Read (View)
-
-Public getter for raw data access via the assignment ID.
-
-AssignmentSubmitted
-
-Event
-
-Emitted when a new record is created, allowing off-chain applications to track activity efficiently.
-
 📄 Smart Contract Details
 
 Language: Solidity ^0.8.0
