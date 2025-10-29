@@ -42,7 +42,7 @@ Network: Ethereum Testnets (e.g., Sepolia, Goerli)
 
 You can view the contract on any supported block explorer at this address:
 
-👉 [XXX]
+👉 https://repo.sourcify.dev/11142220/0x9c7702eCdd3Ad39573B445E0295e03e3106dd036
 
 💻 Smart Contract Code
 
