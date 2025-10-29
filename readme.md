@@ -1,4 +1,4 @@
-WorkChain Records ⛓️
+# WorkChain Records ⛓️
 
 A simple Smart Contract for On-Chain Job Assignment Tracking.
 
