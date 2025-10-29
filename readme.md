@@ -1,18 +1,30 @@
-WorkChain Records
+<img width="1361" height="645" alt="image" src="https://github.com/user-attachments/assets/c0ae658c-3978-43c8-bf9e-f80eedc5db9f" />
+
+
+
+WorkChain Records ⛓️
+
+A Simple Smart Contract for On-Chain Job Assignment Tracking.
 
 💡 Project Description
 
-WorkChain Records is a simple, beginner-friendly smart contract designed to demonstrate the immutability and transparency of blockchain technology by recording submitted job assignments on-chain. It serves as a decentralized, tamper-proof ledger for tracking work completion and maintaining a permanent record of contributions.
+WorkChain Records is a foundational Solidity smart contract designed for beginners to understand how to store structured data immutably on the blockchain. It implements a decentralized, tamper-proof ledger for tracking completed job assignments and maintaining a permanent, verifiable history of contributions.
+
+This project is an excellent starting point for learning about structs, mappings, and basic write/read functions in Solidity.
 
 🎯 What It Does
 
-This contract acts as a central registry for work assignments. Any address can submit a record containing a description of a completed job. The contract assigns a unique, sequential ID to each submission and stores the sender's address and the exact time of submission.
+The contract functions as a simple database where users can permanently log details of a completed job or task.
 
-By storing records on the blockchain, we ensure that once a work assignment is logged, it cannot be altered or removed, providing a verifiable history of labor.
+Submission: Any address can call the submitAssignment function with a text description of the work.
+
+Indexing: The contract automatically assigns a unique, sequential ID to the submission.
+
+Immutability: Once logged, the record (including the submitter's address and timestamp) cannot be changed, providing a clear audit trail.
 
 ✨ Features
 
-The WorkChainRecords contract exposes the following public functions and variables:
+The WorkChainRecords contract provides the following core functions for interacting with the assignment registry:
 
 Function / Variable
 
@@ -22,36 +34,142 @@ Description
 
 submitAssignment(string memory _description)
 
-External (Write)
+Write (Transaction)
 
-Mints a new assignment record with the provided description, assigning it the next available unique ID.
+Creates a new assignment record and stores it on the blockchain. Requires gas.
 
 getAssignment(uint256 _id)
 
-Public (View)
+Read (View)
 
-Retrieves the full details of a specific assignment record (ID, submitter, description, timestamp).
+Retrieves the full structured data (ID, submitter, description, timestamp) for any existing record.
 
 getTotalAssignments()
 
-Public (View)
+Read (View)
 
-Returns the total count of assignment records submitted to the contract.
+Returns the total number of work assignments submitted so far.
 
 records(uint256)
 
-Public (View)
+Read (View)
 
-Automatically generated getter function to view the raw AssignmentRecord data for a given ID.
+Public getter for raw data access via the assignment ID.
 
 AssignmentSubmitted
 
 Event
 
-Emitted upon successful submission of a new record for easy off-chain indexing.
+Emitted when a new record is created, allowing off-chain applications to track activity efficiently.
+
+📜 Smart Contract Code
+
+Below is the complete source code for the WorkChainRecords.sol contract:
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+/**
+ * @title WorkChainRecords
+ * @dev A simple smart contract to record job assignments on the blockchain.
+ * This is a beginner-friendly example for recording data immutably.
+ */
+contract WorkChainRecords {
+
+    // --- Data Structures ---
+
+    // A struct to define the structure of a single job assignment record.
+    struct AssignmentRecord {
+        uint256 id;                 // Unique identifier for the record
+        address submitter;          // The address that submitted the assignment
+        string description;         // A description or details about the submitted work
+        uint256 submissionTimestamp;// The block timestamp when the record was created
+    }
+
+    // A mapping to store all assignment records.
+    // Key: The unique assignment ID (uint256)
+    // Value: The AssignmentRecord struct
+    mapping(uint256 => AssignmentRecord) public records;
+
+    // Counter to track the total number of assignments submitted.
+    // This also serves as the next unique ID for a new submission.
+    uint256 private nextAssignmentId = 1;
+
+
+    // --- Events ---
+
+    // An event emitted when a new assignment is successfully submitted.
+    event AssignmentSubmitted(
+        uint256 id,
+        address indexed submitter,
+        uint256 timestamp
+    );
+
+
+    // --- Functions ---
+
+    /**
+     * @notice Submits a new job assignment record to the WorkChain.
+     * @param _description The detailed description of the job/task completed.
+     */
+    function submitAssignment(string memory _description) public {
+        // 1. Get the current ID and increment the counter for the next submission.
+        uint256 currentId = nextAssignmentId;
+        nextAssignmentId++;
+
+        // 2. Create and store the new record in the 'records' mapping.
+        records[currentId] = AssignmentRecord({
+            id: currentId,
+            submitter: msg.sender,
+            description: _description,
+            submissionTimestamp: block.timestamp
+        });
+
+        // 3. Emit an event for easy off-chain monitoring and tracking.
+        emit AssignmentSubmitted(currentId, msg.sender, block.timestamp);
+    }
+
+    /**
+     * @notice Retrieves a specific assignment record by its ID.
+     * @param _id The unique ID of the assignment record to retrieve.
+     * @return The ID, submitter address, description, and timestamp of the record.
+     */
+    function getAssignment(uint256 _id)
+        public
+        view
+        returns (
+            uint256,
+            address,
+            string memory,
+            uint256
+        )
+    {
+        // Require that the ID must be valid (must be less than the next available ID).
+        require(_id > 0 && _id < nextAssignmentId, "WorkChainRecords: Invalid assignment ID.");
+
+        AssignmentRecord storage record = records[_id];
+
+        // Return the individual fields of the struct.
+        return (
+            record.id,
+            record.submitter,
+            record.description,
+            record.submissionTimestamp
+        );
+    }
+
+    /**
+     * @notice Gets the total number of assignments recorded so far.
+     * @return The ID that will be used for the next submitted assignment.
+     */
+    function getTotalAssignments() public view returns (uint256) {
+        // Since IDs start at 1, the current ID counter is 1 greater than the number of records.
+        return nextAssignmentId - 1;
+    }
+}
+
 
 🔗 Deployed Smart Contract Link
 
-The deployed address for the WorkChainRecords contract can be found here:
-
-https://repo.sourcify.dev/11142220/0x9c7702eCdd3Ad39573B445E0295e03e3106dd036
+You can view the contract on any supported block explorer at this address:
+(https://repo.sourcify.dev/11142220/0x9c7702eCdd3Ad39573B445E0295e03e3106dd036)
