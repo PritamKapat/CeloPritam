@@ -1,4 +1,4 @@
-<img width="1032" height="402" alt="image" src="https://github.com/user-attachments/assets/3c0043f4-68e8-4f95-b995-454aa0509de7" />
+<img width="1187" height="642" alt="image" src="https://github.com/user-attachments/assets/571c34e6-2a2d-42d0-adca-f5b63acdb65b" />
 
 # WorkChain Records ⛓️
 
