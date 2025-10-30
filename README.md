@@ -32,7 +32,7 @@ The WorkChainRecords contract provides the following core functionalities:
 
 ⏱️ Timestamped Proof: Every submission is recorded with the block timestamp for accurate proof of work.
 
-##📄 Smart Contract Details
+## 📄Smart Contract Details
 
 Language: Solidity ^0.8.0
 
@@ -46,45 +46,6 @@ You can view the contract & transaction address on any supported block explorer 
 
 👉 [View on Blockscout](https://celo-sepolia.blockscout.com/tx/0xca954b0474426311c868b6a8fbb9a5447c395242ec9864113e47585d774a547b)
 👉 [Contract Address](https://repo.sourcify.dev/11142220/0x9c7702eCdd3Ad39573B445E0295e03e3106dd036)
-
-
-## 💻 Smart Contract Code
-
-Below is the complete source code for the WorkChainRecords.sol contract:
-
-```solidity
-//paste your code
-````
-
-
-## 🚀 How to Run Locally
-
-This guide assumes you are using the Remix IDE, a popular in-browser tool for Solidity development.
-
-1.Clone the repository
-
-```bash
-   git clone https://github.com/your-username/XXX.git
-   cd XXX
-   ```
-
-
-2.**Open Remix IDE**
-
-   * Visit [Remix IDE](https://remix.ethereum.org)
-   * Paste your smart contract code inside a new file (`WorkChain.sol`)
-
-3. **Compile & Deploy**
-
-   * Select **Solidity Compiler** → version `0.8.20`
-   * Deploy using **Injected Web3** to connect your **Celo wallet**
-
-
-4. Interact with the Contract
-
-Call submitAssignment() with a description string to add a new record.
-
-Use getAssignment() with the index (starting at 0) to retrieve the saved data.
 
 ## 🧩 Future Enhancements
 
@@ -103,3 +64,6 @@ Web Interface: Build a simple frontend DApp (Decentralized Application) using Et
 💡 Pro Tip: Always check the gas cost for your submitAssignment transaction before deploying to a live network!
 
 ## 🧠 Made with ❤️ by Pritam Kapat
+```
+
+---
